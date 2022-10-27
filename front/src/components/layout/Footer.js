@@ -5,7 +5,7 @@ export const Footer = () => {
     <Fragment>
         <footer className="py-1">
             <p className="text-center mt-1">
-                My Shop Online - 2022 - Mision TIC - Todos los derechos reservados
+            Toyland - 2022 - DevMaster - Todos los derechos reservados
             </p>
         </footer>
 
