@@ -1,0 +1,59 @@
+**************************************************************************************************
+************************************INICIAR PROYECTO BACK *****************************************
+**************************************************************************************************
+- Arranca proyecto desde carpeta principal despues de crear carpetas Front y Back
+npm init
+
+- Despues se responden las preguntas que realiza el sistema, si sale error es por que no se instalo bien node.js
+>enter 
+>ingresar descripcion (nombre) 
+>entry point (colocar = server.js) 
+> keyworks (se deja en blanco) 
+>licencia (se deja en blanco)
+
+con lo anterior se instala el package.json con todo lo necesario para el proyecto clonado
+
+-Se instalan dependencias y recursos con el comando npm i (nombre del recurso)
+npm i express dotenv mongoose
+
+-Se prueba servidor desde la carpeta back con el comenado
+node back/server.js
+
+-Para relanzar automaticamente los cambios en el proyecto
+npm i nodemon --save-dev
+
+-Cambiar en el  package.json lo siguiente donde dice Debug
+
+"scripts": {
+"start": "node back/server.js",
+"dev":"SET NODE_ENV=DEVELOPMENT& nodemon back/server",
+"prod":"SET NODE_ENV=PRODUCTION& nodemon back/server"
+},
+
+-Para correr poryecto en modo desarrollo
+npm run dev
+
+**************************************************************************************************
+***********************************INICIAR PROYECTO FRONT*****************************************
+**************************************************************************************************
+-Crear front parandose en la carpeta con (cd front) y el siguiente comando>>
+npx create-react-app .
+
+-Validacion de errores de vulnerabilidad y actualizaciones>>
+npm config set legacy-peer-deps true
+npm audit fix --force
+npx create-react-app@5.0.1 .
+
+-Intalaciones de dependencias para el front en el packaje.json>>
+npm i axios react-alert react-alert-template-basic react-bootstrap react-helmet react-redux redux redux-thunk redux-devtools-extension react-router-dom
+
+-Cuando arroja error se ejecuntan los siguientes comando y se instalan las dependencias de nuevo con el codigo anterior
+npm config set legacy-peer-deps true
+npm audit fix --force
+
+-Se inicia el front con el siguiente comando
+npm start 
+
+-Si arroja error (react)al iniciar el front se pega el siguiente codigo en el archivo App.js y se relanza
+import React from 'react';
+
