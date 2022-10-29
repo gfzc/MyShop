@@ -5,6 +5,13 @@ const fetch =(url)=>import('node-fetch').then(({default:fetch})=>fetch(url)); //
 //Ver toda la lista de los productos
 exports.getProducts= async(req, res, nest)=>{
     const productos= await producto.find();
+    if(!productos){
+        return res.status(404).json({
+            success: false,
+            error: true
+        })
+    }
+
     res.status(200).json({
         success:true,
         cantidad: productos.length,
