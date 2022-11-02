@@ -1,12 +1,12 @@
 import React, { Fragment, useEffect } from 'react'
 import MetaData from './layout/MetaData'
 import {useDispatch, useSelector} from 'react-redux'
-import { getProducts } from '../actions/producActions'
+import { getProducts } from '../actions/productActions'
 import {Link} from 'react-router-dom'
 import { useAlert } from 'react-alert'
 
 export const Home = () => {
-  const {loading, productos, error}  = useSelector(state => state.productos)
+  const {loading, productos, error}  = useSelector(state => state.productos) 
   const alert=useAlert();
 
   const dispatch = useDispatch();
@@ -16,7 +16,7 @@ export const Home = () => {
     }  
 
     dispatch(getProducts());
-    alert.success("OK")
+    
   }, [dispatch])
 
   return (

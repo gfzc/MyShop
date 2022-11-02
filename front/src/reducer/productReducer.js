@@ -42,7 +42,7 @@ import {
 }
 
 //Reducer para todos los detalles
-export const productsDeailsReducer = (state ={productos: {}}, action) =>{
+export const productDetailsReducer = (state ={product: {}}, action) =>{
     switch(action.type){
         case PRODUCT_DETAILS_REQUEST:
             return{
@@ -53,7 +53,7 @@ export const productsDeailsReducer = (state ={productos: {}}, action) =>{
         case PRODUCT_DETAILS__SUCCESS:
              return{
                 loading:false,
-                product: action.payload.product
+                product: action.payload
              }   
 
         case PRODUCT_DETAILS_FAIL:
