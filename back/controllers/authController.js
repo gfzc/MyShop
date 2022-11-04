@@ -1,7 +1,9 @@
 const User = require("../models/auth")
-const ErroHandler = require("../utils/errorHandler")
+const ErrorHandler = require("../utils/errorHandler")
 const catchAsyncErrors= require("../middleware/catchAsyncErrors");
 const { response } = require("express");
+const crypto = require("crypto");
+const tokenEnviado = require("../utils/jwtToken");
 
 //Registro nuevo usuario /api/usuario/registro
 exports.registroUsuario= catchAsyncErrors(async (req, res, next) =>{
@@ -17,9 +19,30 @@ exports.registroUsuario= catchAsyncErrors(async (req, res, next) =>{
         }
     })
 
-    res.status(201).json({
-        success: true,
-        user
-    })
+    tokenEnviado(user, 201, res)
+})
 
+
+//Iniciar Sesion - Login
+exports.loginUser = catchAsyncErrors(async(req, res, next)=>{
+    const { email, password} =  req.body;
+
+    //Revisar campos completos
+    if (!email || !password){
+        return next(new ErrorHandler("Por favor ingrese email y Contraseña", 400))
+    }
+
+    //Buscar al usuario en base de datos
+    const user = await User.findOne({email}).select("+password")
+    if(!user){
+        return next(new ErrorHandler("Email o contraseña invalidos", 401))
+    }
+
+    //Comparar contraseñas, verificarla
+    const contrasenaOK= await user.compararPass(password);
+    if (!contrasenaOK){
+        return next(new ErrorHandler("Contraseña invalida",401))
+    }
+
+    tokenEnviado(user, 200, res)
 })

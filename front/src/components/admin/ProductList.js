@@ -59,17 +59,18 @@ export const ProductList = () => {
                 inventario: product.inventario,
                 vendedor: product.vendedor,
                 actions: <Fragment>
-                    <Link to={`/producto/${product._id}`} className="btn btn-primary py-1 px-2">
-                        <i className="fa fa-eye"></i>
-                    </Link><Link to="/" className="btn btn-warning py-1 px-2">
-                    <i class="fa fa-pencil"></i>
+                    <Link to={`/producto/${product._id}`} className="btn btn-secundary py-1 px-2" >
+                        <i className="fa fa-eye"> </i>  
                     </Link>
 
-                    <Link to="/" className="btn btn-danger py-1 px-2">
-                        <i className="fa fa-trash"></i>
+                    <Link to="/" className="btn btn-success py-1 px-2" >
+                    <i class="fa fa-pencil"> </i>
+                    </Link>
+
+                    <Link to="/" className="btn btn-danger py-1 px-2" >
+                        <i className="fa fa-trash"> </i>
                     </Link>
                     
-
                 </Fragment>
             })
         })
