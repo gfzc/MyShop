@@ -17,6 +17,11 @@ const usuarioSchema = new mongoose.Schema({
         unique: true,
         validate: [validator.isEmail, "Por favor ingrese el correo valido"]
     },
+    address:{
+        type: String,
+        required:[true,"Por favor ingrese direcion"],
+        maxLength:[120,"La direccion no debe exceder los 120 caracteres"]
+    },
     password:{
       type:String,
       required:[true,"Por favor registr una contraseña"],
