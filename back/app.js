@@ -10,9 +10,12 @@ app.use(cookieParser());
 //Importar rutas
 const productos = require("./routes/products")
 const usuarios= require("./routes/auth")
+const ordenes= require("./routes/orders")
 
+//Dar permisos para usuar en el api las rutas
 app.use('/api', productos) //Sujeto a verificacion (ruta del navagador)
 app.use('/api', usuarios)
+app.use('/api', ordenes)
 
 //Middleware para manejo de errores
 app.use(errorMiddleware)
