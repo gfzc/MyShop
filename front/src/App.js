@@ -9,7 +9,10 @@ import { ProductDetails } from './components/products/ProductDetail';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Dashboard from './components/admin/Dashboard';
 import { ProductList } from './components/admin/ProductList';
+import NewProduct from './components/admin/newProduct'
 import Cart from './components/cart/Cart';
+import { Login } from './components/user/Login';
+
 
 
 function App() {
@@ -25,7 +28,11 @@ function App() {
             <Route path="/producto/:id" element={<ProductDetails />}/>
             <Route path="/dashboard" element={<Dashboard />}/>
             <Route path="/productList" element={<ProductList />}/>
+            <Route path="/nuevoProducto" element={<NewProduct />}/>
+            <Route path="/search/:keyword" element={<Home />}/>
             <Route path="/carrito" element={<Cart />}/>
+            <Route path="/login" element={<Login />} />
+
           </Routes>
         </div>
         <Footer />
