@@ -43,7 +43,7 @@ export const ProductDetails = () => {
    
   return (
     <Fragment>
-      {loading ? <i class='fa fa-spinner fa-spin fa-3x fa-fw'></i> :( 
+      {loading ? <i class='fa fa-refresh fa-spin fa-3x fa-fw'></i> :( 
 
         <Fragment>
         <MetaData title={product.nombre}></MetaData>

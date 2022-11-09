@@ -78,6 +78,7 @@ cartItems = Array.from(cartItems);
 
                                             <div className="col-5 col-lg-3">
                                                 <Link to={`/producto/${item._id}`}>{item.nombre}</Link>
+                                               {/*  <Link to={`/producto/${producto._id}`}>{producto.nombre}</Link> */}
                                             </div>
 
 

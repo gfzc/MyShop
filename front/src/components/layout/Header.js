@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react'
+import "../../App.css"
 import {Link} from 'react-router-dom'
 import Search from './Search'
 
@@ -9,7 +10,7 @@ const Header = () => {
         <nav className='navbar row'>
             <div className='col-12 col-md-3'>
                 <div className='navbar-brand'>
-                    <img src="./images/logo.png" alt="Toyland"></img>
+                <Link to="/" ><img src="./images/logo.png" alt="Toyland"></img></Link>
                 </div>
             </div>
 

@@ -39,6 +39,7 @@ const productosSchema=mongoose.Schema({
         enum:{
             values:[
                 "Juguetes para bebé",
+                "Transporte",
                 "Muñecas",
                 "Peluches",
                 "Juegos de Mesa",
