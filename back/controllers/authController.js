@@ -1,14 +1,21 @@
 const User = require("../models/auth")
 const ErrorHandler = require("../utils/errorHandler")
 const catchAsyncErrors= require("../middleware/catchAsyncErrors");
-const { response } = require("express");
-const crypto = require("crypto");
+//const { response } = require("express");
 const tokenEnviado = require("../utils/jwtToken");
 const sendEmail = require("../utils/sendEmail");
+const crypto = require("crypto");
+const cloudinary= require("cloudinary")
 
 //Registro nuevo usuario /api/usuario/registro
 exports.registroUsuario= catchAsyncErrors(async (req, res, next) =>{
     const {nombre, email, address, password}= req.body;
+
+    const result= await cloudinary.v2.uploader.upload(req.body.avatar, {
+        folder:"avatars",
+        width:240,
+        crop:"scale"
+    })
 
     const user= await User.create({
         nombre,
@@ -16,8 +23,8 @@ exports.registroUsuario= catchAsyncErrors(async (req, res, next) =>{
         address,
         password,
         avatar:{
-            public_id:"ANd9GcQKZwmqodcPdQUDRt6E5cPERZDWaqy6ITohlQ&usqp",
-            url:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKZwmqodcPdQUDRt6E5cPERZDWaqy6ITohlQ&usqp=CAU"
+            public_id:result.public_id,
+            url:result.secure_url
         }
     })
 
@@ -45,7 +52,7 @@ exports.loginUser = catchAsyncErrors(async(req, res, next)=>{
     if (!contrasenaOK){
         return next(new ErrorHandler("Contraseña invalida",401))
     }
-
+    
     tokenEnviado(user, 200, res)
 })
 

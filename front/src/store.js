@@ -7,7 +7,7 @@ import { authReducer } from './reducer/userReducer';
 const reducer= combineReducers ({
     productos: productsReducer,
     productDetails: productDetailsReducer,
-    authUser: authReducer
+    auth: authReducer
 })
 
 //Variable de tipo let que se puede modificar pero no se puede volvel al declarar
