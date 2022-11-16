@@ -8,7 +8,7 @@ import { logout} from "../../actions/userActions"
 
 
 const Header = () => {
-  //const {cartItems} = useSelector(state=>state.cart)
+  const {cartItems} = useSelector(state=>state.cart)
   const alert= useAlert();
   const dispatch= useDispatch();
   const { user, loading } = useSelector(state => state.auth)
@@ -37,7 +37,7 @@ const Header = () => {
             
             <div className="col-12 col-md-4 mt-4 mt-md-0 text-center">   
             <Link to="/carrito"><i class="fa fa-shopping-cart fa-2x text-white" aria-hidden="true"></i>
-                <span className="ml-1" id="cart_count">4</span></Link>
+                <span className="ml-1" id="cart_count">{cartItems.length}</span></Link>
 
                     {user ? (
                         <div className="ml-4 dropdown d-inline">
