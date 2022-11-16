@@ -7,6 +7,11 @@ import {
     REGISTER_USER_REQUEST,
     REGISTER_USER_SUCCESS,
     REGISTER_USER_FAIL,
+    LOAD_USER_REQUEST,
+    LOAD_USER_SUCCESS,
+    LOAD_USER_FAIL,
+    LOGOUT_SUCCESS,
+    LOGOUT_FAIL,
     CLEAR_ERRORS
 } from "../constants/userConstants"
 
@@ -60,7 +65,37 @@ export const register = (userData) => async (dispatch) => {
     }
 }
 
+//CARGAR EL USUARIO (LOAD USER)
+export const loadUser=()=> async(dispatch) =>{
+    try{
+        dispatch({type: LOAD_USER_REQUEST})
+        const {data} = await axios.get("/api/me")
+        dispatch({
+            type: LOAD_USER_SUCCESS,
+            payload: data.user
+        })
+    }catch(error){
+        dispatch({
+            type: LOAD_USER_FAIL,
+            payload: error.response.data.message
+        })
+    }
+}
 
+//logout User
+export const logout = () => async (dispatch)=>{
+    try{
+        await axios.get("/api/logout")
+        dispatch({
+            type: LOGOUT_SUCCESS,
+        })
+    } catch(error){
+        dispatch({
+            type:LOGOUT_FAIL,
+            payload: error.response.data.message
+        })
+    }
+}
 
 //Clear error
 export const clearErrors = () => async (dispatch) =>{

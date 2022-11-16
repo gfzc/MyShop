@@ -1,6 +1,7 @@
 
 import './App.css';
-import React from 'react';
+import React, {useEffect} from 'react';
+//import React from 'react';
 import Header from './components/layout/Header';
 import { Footer } from './components/layout/Footer';
 import Home from './components/Home';
@@ -13,13 +14,20 @@ import NewProduct from './components/admin/newProduct'
 import Cart from './components/cart/Cart';
 import { Login } from './components/user/Login';
 import { Register } from './components/user/Register';
+import { loadUser } from './actions/userActions';
+import store from "./store"
+import { Profile } from './components/user/Profile';
+import ProtectedRoute from './routes/ProtectedRoute';
 
 
 
 function App() {
+  useEffect(()=>{
+    store.dispatch(loadUser())
+   },[])
+
   return (
     <Router>
-
     <div className="App">
         <Header />
         <div className='container container-fluid'>
@@ -27,13 +35,17 @@ function App() {
             <Route path="/" element={<Home />}/>
             <Route path="/Home" element={<Home />}/>
             <Route path="/producto/:id" element={<ProductDetails />}/>
-            <Route path="/dashboard" element={<Dashboard />}/>
             <Route path="/productList" element={<ProductList />}/>
             <Route path="/nuevoProducto" element={<NewProduct />}/>
             <Route path="/search/:keyword" element={<Home />}/>
             <Route path="/carrito" element={<Cart />}/>
             <Route path="/login" element={<Login />} />
             <Route path="/register" element= {<Register />} />
+            <Route path="/me" element={<Profile />}/>
+
+
+            {/*Ruta protegida*/}
+            <Route path="/dashboard" element={<ProtectedRoute isAdmin={true}><Dashboard /></ProtectedRoute>}/>
 
           </Routes>
         </div>
