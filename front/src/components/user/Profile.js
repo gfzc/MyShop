@@ -19,7 +19,7 @@ export const Profile = () => {
                             <figure className='avatar avatar-profile'>
                                 <img className="rounded-circle img-fluid" src={user.avatar.url} alt={user.nombre} />
                             </figure>
-                            <Link to="/yo/update" id="edit_profile" className="btn btn-primary btn-block my-5">
+                            <Link to="/me/update" id="edit_profile" className="btn btn-primary btn-block my-5">
                                 Editar Perfil
                             </Link>
                         </div>
@@ -30,6 +30,9 @@ export const Profile = () => {
 
                             <h4>Email</h4>
                             <p>{user.email}</p>
+
+                            <h4>Direccion</h4>
+                            <p>{user.address}</p>
 
                             <h4>Registrado el: </h4>
                             <p>{String(user.fechaRegistro).substring(0, 10)}</p>

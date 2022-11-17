@@ -18,6 +18,7 @@ import { loadUser } from './actions/userActions';
 import store from "./store"
 import { Profile } from './components/user/Profile';
 import ProtectedRoute from './routes/ProtectedRoute';
+import { UpdateProfile } from "./components/user/UpdateProfile";
 
 
 
@@ -42,6 +43,7 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/register" element= {<Register />} />
             <Route path="/me" element={<Profile />}/>
+            <Route path="/me/update" element={<UpdateProfile />} />
 
 
             {/*Ruta protegida*/}

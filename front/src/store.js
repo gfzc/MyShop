@@ -2,14 +2,15 @@ import { createStore, combineReducers, applyMiddleware} from 'redux';
 import thunk from 'redux-thunk';
 import { composeWithDevTools} from 'redux-devtools-extension';
 import { productsReducer, productDetailsReducer } from './reducer/productReducer';
-import { authReducer } from './reducer/userReducer';
+import { authReducer, userReducer } from './reducer/userReducer';
 import { cartReducer } from './reducer/cartReducer';
 
 const reducer= combineReducers ({
     productos: productsReducer,
     productDetails: productDetailsReducer,
     auth: authReducer,
-    cart: cartReducer,
+    user: userReducer,
+    cart: cartReducer
 })
 
 //Variable de tipo let que se puede modificar pero no se puede volvel al declarar

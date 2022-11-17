@@ -19,6 +19,7 @@ const usuarioSchema = new mongoose.Schema({
     },
     address:{
         type: String,
+        default: 'Sin direccion',
         //required:[true,"Por favor ingrese direcion"],
         maxLength:[120,"La direccion no debe exceder los 120 caracteres"]
     },
