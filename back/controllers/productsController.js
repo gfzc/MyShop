@@ -4,6 +4,7 @@ const producto=require("../models/productos");
 const APIFeatures = require("../utils/apiFeatures");
 const ErrorHandler=require("../utils/errorHandler")
 const fetch =(url)=>import('node-fetch').then(({default:fetch})=>fetch(url)); //Usurpacion del require
+const cloudinary=require("cloudinary")
 
 //Ver toda la lista de los productos
 exports.getProducts= catchAsyncErrors (async(req, res, next)=>{
@@ -81,6 +82,26 @@ exports.deleteProduct= catchAsyncErrors (async (req,res,next)=>{
 
 //Crear nuevo producto /api/productos
 exports.newProduct= catchAsyncErrors( async(req,res,next)=>{
+    let imagen=[]
+    if(typeof req.body.imagen==="string"){
+        imagen.push(req.body.imagen)
+    }else{
+        imagen=req.body.imagen
+    }
+
+    let imagenLink=[]
+
+    for (let i=0; i<imagen.length;i++){
+        const result = await cloudinary.v2.uploader.upload(imagen[i],{
+            folder:"products"
+        })
+        imagenLink.push({
+            public_id:result.public_id,
+            url: result.secure_url
+        })
+    }
+
+    req.body.imagen=imagenLink
     req.body.user = req.user.id;
     
     const product= await producto.create(req.body);
@@ -163,6 +184,17 @@ exports.deleteReview = catchAsyncErrors(async (req, res, next) => {
     res.status(200).json({
         success: true,
         message: "review eliminada correctamente"
+    })
+
+})
+
+//Ver la lista de productos (Admin)
+exports.getAdminProducts = catchAsyncErrors(async (req, res, next) => {
+
+    const products = await producto.find()
+
+    res.status(200).json({
+        products
     })
 
 })

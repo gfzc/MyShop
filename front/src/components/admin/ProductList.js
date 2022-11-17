@@ -3,23 +3,27 @@ import { MDBDataTable } from 'mdbreact'
 
 import MetaData from '../layout/MetaData'
 import Sidebar from './Sidebar'
+
 import { useAlert } from 'react-alert'
 import { useDispatch, useSelector } from 'react-redux'
-import { getProducts } from '../../actions/productActions'
+import { clearError, getAdminProducts} from '../../actions/productActions'
 import {Link } from "react-router-dom"
 
 export const ProductList = () => {
-    const { loading, productos, error} = useSelector(state=> state.productos)
     const alert= useAlert();
-
     const dispatch = useDispatch();
+
+    const { loading, error, productos} = useSelector(state=> state.productos)
+
     useEffect(() => {
-        if (error){
-            return alert.error(error)
+        dispatch(getAdminProducts());
+
+        if (error) {
+            alert.error(error);
+            dispatch(clearError())
         }
 
-        dispatch(getProducts());
-    }, [dispatch])
+    }, [dispatch, alert, error])
 
     const setProducts = () => {
         const data = {
@@ -80,7 +84,7 @@ export const ProductList = () => {
 
     return (
         <Fragment>
-            <MetaData title={'All Products'} />
+            <MetaData title={'Todos los Productos'} />
             <div className="row">
                 <div className="col-12 col-md-2">
                     <Sidebar />
@@ -88,7 +92,7 @@ export const ProductList = () => {
 
                 <div className="col-12 col-md-10">
                     <Fragment>
-                        <h1 className="my-5">Productos Registrados</h1>
+                        <h1 className="my-5">Todos los Productos</h1>
 
                         {loading ? <i class="fa fa-refresh fa-spin fa-3x fa-fw"></i> :(
                             <MDBDataTable

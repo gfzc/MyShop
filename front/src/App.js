@@ -10,12 +10,12 @@ import { ProductDetails } from './components/products/ProductDetail';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Dashboard from './components/admin/Dashboard';
 import { ProductList } from './components/admin/ProductList';
-import NewProduct from './components/admin/newProduct'
+import NewProduct from './components/admin/NewProduct'
 import Cart from './components/cart/Cart';
 import { Login } from './components/user/Login';
 import { Register } from './components/user/Register';
 import { loadUser } from './actions/userActions';
-import store from "./store"
+import store from "./store";
 import { Profile } from './components/user/Profile';
 import ProtectedRoute from './routes/ProtectedRoute';
 import { UpdateProfile } from "./components/user/UpdateProfile";
