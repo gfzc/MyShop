@@ -1,13 +1,16 @@
 import React, { Fragment} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { addItemToCart, removeItemFromCart } from '../../actions/cartActions'
 import MetaData from '../layout/MetaData'
 
 
 const Cart = () => {
+    const navigate=useNavigate()
     const dispatch= useDispatch();
     const {cartItems} = useSelector(state => state.cart)
+    const {user} =useSelector(state => state.auth)
+
 
     const increaseQty = (id, quantity, inventario) => {
         const newQty = quantity+1;
@@ -20,6 +23,15 @@ const Cart = () => {
         if (newQty <= 0) return;
         dispatch(addItemToCart(id, newQty))
    }
+
+   const checkOutHandler = () =>{
+        if (user){
+            navigate("/shipping")
+        }
+        else{
+            navigate("/login")
+        }
+    }   
 
    const removeCartItemHandler= (id)=>{
     dispatch(removeItemFromCart(id))
@@ -88,7 +100,7 @@ const Cart = () => {
                                 <p>Productos:  <span className="order-summary-values">{cartItems.reduce((acc, item)=>(acc+Number(item.quantity)),0)} (Unidades)</span></p>
                                 <p>Total: <span className="order-summary-values">${cartItems.reduce((acc, item)=> acc+(item.quantity*item.precio),0).toFixed(2)}</span></p>
                                 <hr />
-                                <button id="checkout_btn" className="btn btn-primary btn-block">Comprar!</button>
+                                <button id="checkout_btn" className="btn btn-primary btn-block" onClick={checkOutHandler}>Comprar!</button>                            
                             </div>
                         </div>
                     </div>
